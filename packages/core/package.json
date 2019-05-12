@@ -1,0 +1,47 @@
+{
+  "name": "@ruling/core",
+  "version": "0.1.0",
+  "description": "A javascript library for validate",
+  "source": "./index.ts",
+  "main": "dist/ruling.js",
+  "umd:main": "dist/ruling.umd.js",
+  "module": "dist/ruling.mjs",
+  "scripts": {
+    "test": "jest",
+    "build": "microbundle"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Chersquwn/ruling.git"
+  },
+  "keywords": [
+    "validator",
+    "check"
+  ],
+  "files": [
+    "dist",
+    "src",
+    "index.ts",
+    "package.json"
+  ],
+  "author": "Chersquwn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Chersquwn/ruling/issues"
+  },
+  "homepage": "https://github.com/Chersquwn/ruling#readme",
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/jest": "^24.0.12",
+    "babel-jest": "^24.7.1",
+    "jest": "^24.7.1",
+    "microbundle": "^0.11.0",
+    "tslib": "^1.9.3",
+    "typescript": "^3.4.5"
+  },
+  "dependencies": {
+    "@ruling/validator": "^0.1.0"
+  }
+}

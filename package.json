@@ -1,0 +1,55 @@
+{
+  "name": "ruling",
+  "private": true,
+  "scripts": {
+    "build": "lerna run build",
+    "test": "lerna run test",
+    "lint": "eslint packages/*/src/**/*.ts"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Chersquwn/ruling.git"
+  },
+  "keywords": [
+    "validator",
+    "check"
+  ],
+  "bugs": {
+    "url": "https://github.com/Chersquwn/ruling/issues"
+  },
+  "homepage": "https://github.com/Chersquwn/ruling#readme",
+  "devDependencies": {
+    "lerna": "^3.13.4",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@types/jest": "^24.0.12",
+    "@typescript-eslint/eslint-plugin": "^1.7.0",
+    "@typescript-eslint/parser": "^1.7.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.7.1",
+    "eslint": "^5.16.0",
+    "eslint-config-chersquwn": "^1.2.2",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-promise": "^4.1.1",
+    "husky": "^2.2.0",
+    "jest": "^24.7.1",
+    "lint-staged": "^8.1.6",
+    "microbundle": "^0.11.0",
+    "prettier": "^1.17.0",
+    "tslib": "^1.9.3",
+    "typescript": "^3.4.5"
+  }
+}
