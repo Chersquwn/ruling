@@ -1,22 +1,27 @@
+import validator from '@ruling/validator'
+
 type RulingData = string | number
 type Range = [number, number]
+type Callback = (ctx: Ruling) => void
 
 export default class Ruling {
   public value: RulingData
   public passed: boolean
   public message: string
 
-  public constructor(value: RulingData) {
+  public constructor(value?: RulingData) {
     this.value = value
-    this.passed = false
+    this.passed = true
     this.message = 'passed'
   }
 
   public data(value: RulingData) {
     this.value = value
+
+    return this
   }
 
-  public required(message: string): Ruling {
+  public required(message: string, callback?: Callback) {
     if (!this.passed) return this
 
     if (!this.value) {
@@ -24,49 +29,75 @@ export default class Ruling {
       this.passed = false
     }
 
-    return this
-  }
-
-  public minLength(length: number, message: string): Ruling {
-    if (!this.passed) return this
-
-    if (this.value.toString().length < length) {
-      this.message = message
-      this.passed = false
-    }
+    callback && callback(this)
 
     return this
   }
 
-  public maxLength(length: number, message: string): Ruling {
+  public minLength(length: number, message: string, callback?: Callback) {
     if (!this.passed) return this
 
-    if (this.value.toString().length > length) {
+    if (validator.lt(this.value.toString().length, length)) {
       this.message = message
       this.passed = false
     }
+
+    callback && callback(this)
 
     return this
   }
 
-  public equals(data: RulingData, message: string): Ruling {
+  public maxLength(length: number, message: string, callback?: Callback) {
     if (!this.passed) return this
 
-    if (this.value !== data) {
+    if (validator.gt(this.value.toString().length, length)) {
       this.message = message
       this.passed = false
     }
+
+    callback && callback(this)
 
     return this
   }
 
-  public range(range: Range, message: string): Ruling {
+  public equals(data: RulingData, message: string, callback?: Callback) {
     if (!this.passed) return this
 
-    if (this.value < range[0] || this.value > range[1]) {
+    if (validator.not(this.value, data)) {
       this.message = message
       this.passed = false
     }
+
+    callback && callback(this)
+
+    return this
+  }
+
+  public range(range: Range, message: string, callback?: Callback) {
+    if (!this.passed) return this
+
+    if (
+      validator.lt(this.value, range[0]) ||
+      validator.gt(this.value, range[1])
+    ) {
+      this.message = message
+      this.passed = false
+    }
+
+    callback && callback(this)
+
+    return this
+  }
+
+  public regexp(reg: RegExp, message: string, callback?: Callback) {
+    if (!this.passed) return this
+
+    if (!reg.test(this.value.toString())) {
+      this.message = message
+      this.passed = false
+    }
+
+    callback && callback(this)
 
     return this
   }

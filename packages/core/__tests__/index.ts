@@ -1,14 +1,11 @@
-import Ruling from '../ruling'
+import Ruling from '../index'
 
-test('aaa', async () => {
-  expect.assertions(1)
-  const { passed, message } = await new Ruling()
+test('Ruling', () => {
+  const { passed, message } = new Ruling()
     .data(1)
-    .then(resp => resp.equals(2, 'not equals'))
-    .then(resp => resp.range([2, 4], 'not range'))
-    .catch(resp => resp)
+    .equals(2, 'not equals')
+    .range([2, 4], 'not range')
 
-  console.log(passed, message)
-
-  expect(passed).toEqual(true)
+  expect(passed).toEqual(false)
+  expect(message).toEqual('not equals')
 })
